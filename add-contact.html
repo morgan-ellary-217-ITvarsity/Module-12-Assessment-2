@@ -1,0 +1,162 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Contact book</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+                <a href=# class="navbar-brand"> <img src="images/logo.png" width="50px"></a>
+                <br/>
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <br/><br/><br/><br/>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="add-contact.html" class="nav-item nav-link">Add Contact</a>
+                    </div>
+
+                </div>
+
+            </nav>
+        </header>
+        <main>
+            <div id="carouselImg" class="carousel slide carouselImg" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselImg" data-slide-to="0"></li>
+                    <li data-target="#carouselImg" data-slide-to="1"></li>
+                    <li data-target="#carouselImg" data-slide-to="2"></li>
+                    <li data-target="#carouselImg" data-slide-to="3"></li>
+
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/contact-1.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Store their name, email and phone number in one place</h1>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/contact-2.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Get unlimited space for contacts</h1>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/contact-3.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Use your contacts on any device</h1>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/contact-4.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Access your contacts anywhere </h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br/>
+           
+            <br/>
+           <div align="center">
+               <table>
+                   <tr>
+                       <td> 
+                       
+                       
+                        <form id="editForm">
+                            <label for="firstname">First Name</label>
+                            <input type="text" name="firstname" id="firstname"><br/>
+            
+                            <label for="lastname">Last Name</label>
+                            <input type="text" name="lastname" id="lastname"><br/>
+            
+                            <label for="mobile">Mobile</label>
+                            <input type="text" name="mobile" id="mobile"><br/>
+            
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email"><br/>
+            
+                            <label for="avatar">Select a file</label>
+                            <input type="file" name="avatar" id="avatar"><br/>
+            
+                            <button type="submit" id="submitForm">Submit</button>
+                        </form>
+                       </td>
+                   </tr>
+               </table>
+           
+           </div>
+           
+           
+            <br/>
+
+            <hr class="section-divider"/>
+            <footer class="section-divider">
+            <p class="container footer-section"><a href="#">Back to top</a></p>
+            <p> &copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a>&middot;<a href="#">Terms</a></p>
+            </footer>
+        </main>
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="config.js"></script>
+        <script>
+            document.getElementById("submitForm").addEventListener('click',submitForm);
+            
+
+            
+
+            function submitForm(e)
+            {
+                e.preventDefault();
+                
+                const form = new FormData(document.querySelector('#editForm'));
+                form.append('apiKey',apiKey);
+                console.log("abc");
+
+                fetch(rootPath + 'controller/insert-contact/',{
+                    method:'POST',
+                    headers:{'Accept':'application/json, *.*'},
+                    body:form
+                    
+                })
+                
+                .then(function(response)
+                {
+                    return response.text();
+                    console.log(response.text());
+                })
+                .then(function(data){
+                    if(data=="1")
+                    {
+                        alert("Contact added.");
+                        homeLink();
+                    }
+                    else{
+                        alert(data);
+                        console.log(data);
+                    }
+                })
+            }
+
+        </script>
+    </body>
+</html>

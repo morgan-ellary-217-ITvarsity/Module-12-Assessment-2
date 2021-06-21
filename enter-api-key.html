@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API Key</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+               
+                <a href=# class="navbar-brand"> <img src="images/logo.png" width="50px"></a>
+                <br/>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <br/><br/><br/><br/>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <div class="navbar-nav">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="add-contact.html" class="nav-item nav-link">Add Contact</a>
+                    </div>
+
+                </div>
+
+            </nav>
+        </header>
+
+        <main>
+            <div id="carouselImg" class="carousel slide carouselImg" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselImg" data-slide-to="0"></li>
+                    <li data-target="#carouselImg" data-slide-to="1"></li>
+                    <li data-target="#carouselImg" data-slide-to="2"></li>
+                    <li data-target="#carouselImg" data-slide-to="3"></li>
+
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/contact-1.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Store their name, email and phone number in one place</h1>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/contact-2.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Get unlimited space for contacts</h1>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/contact-3.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Use your contacts on any device</h1>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/contact-4.jpg" class="d-block w-100"/>
+                        <div class="carousel-caption">
+                            <h1>Access your contacts anywhere </h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
+            <br/>
+
+        <div align="center"> 
+            <div>Please enter a valid API key.</div>
+            <form>
+                <input type="email" id="apiKey" name="apiKey"/>
+                <button id="submitApiKey">Submit</button>
+            </form>
+        </div>
+           
+
+            <hr class="section-divider"/>
+            <footer class="section-divider">
+            <p class="container footer-section"><a href="#">Back to top</a></p>
+            <p> &copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a>&middot;<a href="#">Terms</a></p>
+            </footer>
+        </main>
+        
+
+        
+        <script>
+            let rootPath = "https://mysite.itvarsity.org/api/ContactBook/";
+            document.getElementById("submitApiKey").addEventListener('click', setApiKey);
+
+            function setApiKey(e){
+                e.preventDefault();
+                
+                apiKey = document.getElementById("apiKey").value;
+                fetch(rootPath + "controller/api-key/?apiKey=" + apiKey)
+                        .then(function (response) {
+                            return response.text();
+                        })
+                        .then(function (data) {
+                            
+                            if (data == "1") {
+                                localStorage.setItem("apiKey", apiKey);
+                                window.open("index.html", "_self");
+                            } else {
+                                alert(data + "Invalid API key entered!");
+                            }
+                        })
+            }
+        </script>
+    </body>
+</html>

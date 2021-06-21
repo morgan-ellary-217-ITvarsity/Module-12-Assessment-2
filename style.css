@@ -1,0 +1,33 @@
+
+/*===basic stlying===*/
+body{
+    background-color:burlywood;
+}
+
+table{
+    font-style: oblique;
+    font-size: larger;
+}
+
+footer{
+    color: teal;
+}
+
+/* ===image scale === */
+#gallery img{
+    left: 200px;
+	margin:12px;
+	-moz-transition: -moz-transform 0.5s ease-in;
+	-webkit-transition: -webkit-transform 0.5s ease-in;
+	-o-transition: -o-transform 0.5s ease-in;
+}
+
+#gallery img:hover{
+	-moz-transform: scale(2);
+	-webkit-transform: scale(2);
+	-o-transform: scale(2);
+ }
+
+ .section1{
+	background-color: white;
+ }
